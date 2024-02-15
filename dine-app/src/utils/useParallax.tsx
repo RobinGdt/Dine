@@ -2,12 +2,13 @@ import { useState, useEffect, useRef } from "react";
 
 const useSlide = (threshold = 0.5) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [opacity, setOpacity] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current) {
+      if (containerRef.current && !hasAnimated) {
         const boundingBox = containerRef.current.getBoundingClientRect();
         const windowMidpoint = window.innerHeight / 2;
 
@@ -19,6 +20,7 @@ const useSlide = (threshold = 0.5) => {
 
         if (isVisible) {
           setOpacity(1);
+          setHasAnimated(true);
         } else {
           setOpacity(0);
         }
@@ -31,7 +33,7 @@ const useSlide = (threshold = 0.5) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [threshold]);
+  }, [threshold, hasAnimated]);
 
   return { containerRef, opacity, isVisible };
 };
