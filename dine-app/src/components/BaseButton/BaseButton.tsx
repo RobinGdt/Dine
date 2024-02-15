@@ -20,12 +20,12 @@ const StyledButton = styled.div<{
 
   &:hover {
     background-color: ${(props) => (props.disabled ? "transparent" : "white")};
-    color: ${(props) =>
+    /* color: ${(props) =>
       props.disabled
         ? `${COLORS.SHUTTLEGRAY[100]}`
         : props.onLight
-        ? "white"
-        : `${COLORS.MIRAGE[100]}`};
+        ? `${COLORS.MIRAGE[100]}`
+        : "white"}; */
   }
 `;
 
@@ -55,6 +55,11 @@ const Button = styled.button<{ disabled?: boolean; onLight?: boolean }>`
         : props.onLight
         ? "white"
         : `${COLORS.MIRAGE[100]}`};
+  }
+
+  h4 {
+    margin-block-end: 15px;
+    margin-block-start: 15px;
   }
 `;
 

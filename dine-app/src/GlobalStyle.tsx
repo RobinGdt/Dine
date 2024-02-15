@@ -8,7 +8,7 @@ const GlobalStyles = styled.createGlobalStyle`
     --beaver-100: ${COLORS.BEAVER[100]};
     --cod-gray-100: ${COLORS.CODGRAY[100]};
     --mirage-100: ${COLORS.MIRAGE[100]};
-    --shuttle-gray-10: ${COLORS.SHUTTLEGRAY[100]};
+    --shuttle-gray-100: ${COLORS.SHUTTLEGRAY[100]};
     --025-px: -0.016rem;
     --05-px: -0.032rem;
     --1-px: -0.063rem;

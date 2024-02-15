@@ -18,3 +18,104 @@ export const Logo = ({
     </svg>
   );
 };
+
+export const Divider = ({
+  fill,
+  width,
+  height,
+}: SVGProps<SVGSVGElement>): JSX.Element => {
+  return (
+    <svg
+      width={width || "71"}
+      height={height || "7"}
+      viewBox="0 0 71 7"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="Group 7">
+        <rect
+          id="Rectangle"
+          x="15"
+          y="3"
+          width="56"
+          height="1"
+          fill={fill || "#9E7F66"}
+        />
+        <circle id="Oval" cx="3.5" cy="3.5" r="3" stroke="#9E7F66" />
+      </g>
+    </svg>
+  );
+};
+
+export const SimpleBar = ({
+  fill,
+  width,
+  height,
+}: SVGProps<SVGSVGElement>): JSX.Element => {
+  return (
+    <svg
+      width={width || "32"}
+      height={height || "7"}
+      viewBox="0 0 32 7"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        id="Rectangle"
+        x="0"
+        y="3"
+        width="56"
+        height="1"
+        fill={fill || "#9E7F66"}
+      />
+    </svg>
+  );
+};
+
+export const Grid = ({
+  fill,
+  width,
+  height,
+}: SVGProps<SVGSVGElement>): JSX.Element => {
+  return (
+    <svg
+      width={width || "160"}
+      height="76"
+      viewBox="0 0 160 76"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        y="70"
+        width={width || "160"}
+        height={height || "6"}
+        fill={fill || "#9E7F66"}
+      />
+      <rect
+        y="56"
+        width={width || "160"}
+        height={height || "6"}
+        fill={fill || "#9E7F66"}
+      />
+      <rect
+        y="42"
+        width={width || "160"}
+        height={height || "6"}
+        fill={fill || "#9E7F66"}
+      />
+      <rect
+        y="28"
+        width={width || "160"}
+        height={height || "6"}
+        fill={fill || "#9E7F66"}
+      />
+      <rect
+        y="14"
+        width={width || "160"}
+        height={height || "6"}
+        fill={fill || "#9E7F66"}
+      />
+      <rect width="160" height="6" fill={fill || "#9E7F66"} />
+    </svg>
+  );
+};
