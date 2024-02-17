@@ -6,9 +6,12 @@ const Typography = styled.createGlobalStyle`
   h1 {
     font-family: "League Spartan";
     font-size: var(--80px);
-    line-height: var(--80px);
     letter-spacing: var(--1-px);
     font-weight: 300;
+
+    @media (max-width: 768px) {
+      font-size: var(--48px);
+    }
   }
 
   h2 {

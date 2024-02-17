@@ -9,6 +9,24 @@ interface ContainerWithButonProps {
 
 const StyledContainer = styled.div`
   width: 50%;
+  flex-wrap: wrap;
+  h1 {
+    margin-block-end: 0;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+`;
+
+const Title = styled.div`
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const ContainerWithButon = ({
@@ -18,9 +36,11 @@ const ContainerWithButon = ({
 }: ContainerWithButonProps): JSX.Element => {
   return (
     <StyledContainer>
-      <h1>{title}</h1>
+      <Title>
+        <h1>{title}</h1>
+      </Title>
       <p>{text}</p>
-      <BaseButton title={butonTitle} width="50%" />
+      <BaseButton to="/booking" title={butonTitle} width="50%" />
     </StyledContainer>
   );
 };

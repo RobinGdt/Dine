@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Divider, Grid } from "../../../starter-code/images/icons/icon";
 import { useState, useEffect } from "react";
+import { shadow } from "../../../GlobalStyle";
 
 interface HomeLocationProps {
   image: any;
@@ -11,7 +12,6 @@ interface HomeLocationProps {
 
 const StyledHomeLocation = styled.div`
   width: 80%;
-  z-index: 1000;
 `;
 
 const HomeLocationContainer = styled.div<{
@@ -19,13 +19,19 @@ const HomeLocationContainer = styled.div<{
   translateY: number;
 }>`
   position: relative;
-  left: 11.45%;
-  bottom: ${(props) => (props.reversed ? "-40px" : "40px")};
+  left: 10%;
+  right: 10%;
+  bottom: ${(props) => (props.reversed ? "-80px" : "40px")};
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: ${(props) => (props.reversed ? "row-reverse" : "row")};
   transform: translateY(${(props) => props.translateY}px);
   transition: transform 0.3s ease-out;
+
+  @media (max-width: 1001px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const HomeLocationText = styled.div<{ reversed?: boolean }>`
@@ -39,21 +45,14 @@ const SubtitleContainer = styled.div`
   width: 85%;
 `;
 
-const ImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const GridContainer = styled.div`
   position: absolute;
   right: -10%;
 `;
 
 const Image = styled.img`
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  width: 100%;
+  box-shadow: ${shadow};
+  width: auto;
 `;
 
 const HomeLocation = ({
@@ -80,14 +79,12 @@ const HomeLocation = ({
   return (
     <StyledHomeLocation>
       <HomeLocationContainer reversed={reversed} translateY={translateY}>
-        <ImageContainer>
-          {reversed && (
-            <GridContainer>
-              <Grid />
-            </GridContainer>
-          )}
-          <Image src={image} />
-        </ImageContainer>
+        {reversed && (
+          <GridContainer>
+            <Grid />
+          </GridContainer>
+        )}
+        <Image src={image} />
         <HomeLocationText reversed={reversed}>
           <SubtitleContainer>
             <Divider />

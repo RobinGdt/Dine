@@ -7,16 +7,15 @@ import locallySourced from "./assets/locally-sourced-desktop.jpg";
 import HomeMenu from "./HomeMenu/HomeMenu";
 import HomeGathering from "./HomeGathering/HomeGathering";
 import FooterBanner from "./FooterBanner/FooterBanner";
-import Footer from "../Footer/Footer";
 
 const StyledHome = styled.div`
-  /* padding: 11.45%; */
+  /* padding: 10%; */
 `;
 
 const LogoContainer = styled.div`
   position: absolute;
   top: 7%;
-  left: 11.45%;
+  left: 10%;
 `;
 
 const Home = (): JSX.Element => {
@@ -43,7 +42,6 @@ const Home = (): JSX.Element => {
       />
       <HomeGathering />
       <FooterBanner />
-      <Footer />
     </StyledHome>
   );
 };

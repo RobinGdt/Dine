@@ -3,8 +3,8 @@ import readyBg from "../assets/ready-bg-desktop.jpg";
 import BaseButton from "../../BaseButton/BaseButton";
 
 const StyledFooterBanner = styled.div`
-  padding-left: 11.45%;
-  padding-right: 11.45%;
+  padding-left: 9%;
+  padding-right: 9%;
   padding-top: 3%;
   padding-bottom: 3%;
   background-repeat: no-repeat;
@@ -23,6 +23,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
 `;
 
 const FooterBanner = () => {
@@ -30,7 +37,7 @@ const FooterBanner = () => {
     <StyledFooterBanner>
       <Container>
         <h2>Ready to make a reservation?</h2>
-        <BaseButton width="30%" title="BOOK A TABLE" />
+        <BaseButton to="/booking" width="40%" title="BOOK A TABLE" />
       </Container>
     </StyledFooterBanner>
   );

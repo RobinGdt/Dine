@@ -14,9 +14,9 @@ const StyledHomeMenu = styled.div`
   background-color: var(--cod-gray-100);
   color: white;
   gap: 10%;
-  padding-top: 11.45%;
-  padding-left: 11.45%;
-  padding-right: 11.45%;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
   padding-bottom: 4%;
 `;
 
@@ -24,14 +24,27 @@ const HomeLocationContainer = styled.div<{
   opacity: number;
 }>`
   display: flex;
+  justify-content: center;
   transition: opacity 1s ease-out;
   opacity: ${(props) => props.opacity};
+  gap: 15%;
+
+  @media (max-width: 1001px) {
+    flex-wrap: wrap;
+    width: 100%;
+  }
 `;
 
 const HomeLocationText = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
+
+  @media (max-width: 1001px) {
+    text-align: center;
+    align-items: center;
+    width: 80%;
+  }
 `;
 
 const Menu = styled.div`
