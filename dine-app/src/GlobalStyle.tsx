@@ -20,11 +20,13 @@ const GlobalStyles = styled.createGlobalStyle`
     --10px: 0.63rem;
     --12px: 0.75rem;
     --14px: 0.875rem;
+    --16px: 1rem;
     --17px: 1.063rem;
     --20px: 1.25rem;
     --24px: 1.5rem;
     --28px: 1.75rem;
     --30px: 1.875rem;
+    --32px: 2rem;
     --48px: 3rem;
     --80px: 5rem;
   }

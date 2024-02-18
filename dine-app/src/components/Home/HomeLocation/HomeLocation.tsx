@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { shadow } from "../../../GlobalStyle";
 
 interface HomeLocationProps {
-  image: any;
+  image: string;
   subtitle: string;
   text: string;
   reversed?: boolean;
@@ -16,7 +16,7 @@ const StyledHomeLocation = styled.div`
 
 const HomeLocationContainer = styled.div<{
   reversed?: boolean;
-  translateY: number;
+  translate: number;
 }>`
   position: relative;
   left: 10%;
@@ -26,7 +26,7 @@ const HomeLocationContainer = styled.div<{
   align-items: center;
   justify-content: center;
   flex-direction: ${(props) => (props.reversed ? "row-reverse" : "row")};
-  transform: translateY(${(props) => props.translateY}px);
+  transform: translateY(${(props) => props.translate}px);
   transition: transform 0.3s ease-out;
 
   @media (max-width: 1001px) {
@@ -48,6 +48,10 @@ const HomeLocationText = styled.div<{ reversed?: boolean }>`
     margin-right: 0;
     width: 80%;
   }
+
+  @media (max-width: 550px) {
+    width: 90%;
+  }
 `;
 
 const SubtitleContainer = styled.div`
@@ -61,11 +65,14 @@ const SubtitleContainer = styled.div`
 const GridContainer = styled.div`
   position: absolute;
   right: -10%;
+
+  @media (max-width: 550px) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
   box-shadow: ${shadow};
-  width: auto;
 `;
 
 const HomeLocation = ({
@@ -74,12 +81,12 @@ const HomeLocation = ({
   text,
   reversed,
 }: HomeLocationProps): JSX.Element => {
-  const [translateY, setTranslateY] = useState(0);
+  const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setTranslateY(scrollY * -0.05);
+      setTranslate(scrollY * -0.05);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -91,7 +98,7 @@ const HomeLocation = ({
 
   return (
     <StyledHomeLocation>
-      <HomeLocationContainer reversed={reversed} translateY={translateY}>
+      <HomeLocationContainer reversed={reversed} translate={translate}>
         {reversed && (
           <GridContainer>
             <Grid />

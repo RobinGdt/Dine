@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { Divider, SimpleBar } from "../../../starter-code/images/icons/icon";
 import beefImage from "../assets/beef-desktop-tablet.jpg";
+import beefImageMobile from "../assets/beef-mobile.jpg";
 import chocolateImage from "../assets/chocolate-desktop-tablet.jpg";
+import chocolateImageMobile from "../assets/chocolate-mobile.jpg";
 import salmonImage from "../assets/salmon-desktop-tablet.jpg";
+import salmonImageMobile from "../assets/salmon-mobile.jpg";
 import useSlide from "../../../utils/useParallax";
+import { useWindowSize } from "../../../utils/windowSizeUtil";
 
 interface StyledHomeMenuProps {
   subtitle: string;
@@ -49,12 +53,23 @@ const HomeLocationText = styled.div`
     align-items: center;
     width: 80%;
   }
+
+  @media (max-width: 550px) {
+    width: 100%;
+    margin-bottom: 70px;
+  }
 `;
 
 const Menu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 550px) {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const MenuWrapper = styled.div`
@@ -66,11 +81,28 @@ const MenuWrapper = styled.div`
     width: 128px;
     height: 96px;
   }
+
+  @media (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    gap: 40px;
+
+    img {
+      width: 327px;
+      height: 245px;
+    }
+  }
 `;
 
 const DividerContainer = styled.div`
   margin-right: 30px;
   align-self: start;
+
+  @media (max-width: 550px) {
+    display: none;
+  }
 `;
 
 const MenuDescription = styled.div`
@@ -81,7 +113,6 @@ const MenuDescription = styled.div`
 const Title = styled.p`
   font-weight: bold;
   margin-block-start: 0;
-  /* margin-block-end: 0; */
 `;
 
 const Description = styled.p`
@@ -98,25 +129,26 @@ const InBetween = styled.div`
 
 const HomeMenu = ({ subtitle, text }: StyledHomeMenuProps): JSX.Element => {
   const { containerRef, opacity } = useSlide();
+  const isMobile = useWindowSize();
 
   const titles = [
     {
       title: "Seared Salmon Fillet",
       description:
         "Our locally sourced salmon served with a refreshing buckwheat summer salad.",
-      image: salmonImage,
+      image: isMobile ? salmonImageMobile : salmonImage,
     },
     {
       title: "Rosemary Filet Mignon",
       description:
         "Our prime beef served to your taste with a delicious choice of seasonal sides.",
-      image: beefImage,
+      image: isMobile ? beefImageMobile : beefImage,
     },
     {
       title: "Summer Fruit Chocolate Mousse",
       description:
         "Creamy mousse combined with summer fruits and dark chocolate shavings.",
-      image: chocolateImage,
+      image: isMobile ? chocolateImageMobile : chocolateImage,
     },
   ];
   return (
@@ -129,8 +161,8 @@ const HomeMenu = ({ subtitle, text }: StyledHomeMenuProps): JSX.Element => {
         </HomeLocationText>
         <Menu>
           {titles.map((item, index) => (
-            <>
-              <MenuWrapper>
+            <div key={index}>
+              <MenuWrapper key={index}>
                 <img src={item.image} alt="" key={index} />
                 <DividerContainer>
                   <SimpleBar />
@@ -141,7 +173,7 @@ const HomeMenu = ({ subtitle, text }: StyledHomeMenuProps): JSX.Element => {
                 </MenuDescription>
               </MenuWrapper>
               {index < 2 && <InBetween />}
-            </>
+            </div>
           ))}
         </Menu>
       </HomeLocationContainer>

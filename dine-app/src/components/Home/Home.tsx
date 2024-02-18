@@ -4,17 +4,17 @@ import HomePresentation from "./HomePresentation/HomePresentation";
 import HomeLocation from "./HomeLocation/HomeLocation";
 import enjoyablePlace from "./assets/enjoyable-place-desktop.jpg";
 import enjoyablePlaceTablet from "./assets/enjoyable-place-tablet.jpg";
+import enjoyablePlaceMobile from "./assets/enjoyable-place-mobile.jpg";
 import locallySourced from "./assets/locally-sourced-desktop.jpg";
 import locallySourcedTablet from "./assets/locally-sourced-tablet.jpg";
+import locallySourcedMobile from "./assets/locally-sourced-mobile.jpg";
 import HomeMenu from "./HomeMenu/HomeMenu";
 import HomeGathering from "./HomeGathering/HomeGathering";
 import FooterBanner from "./FooterBanner/FooterBanner";
 import { useWindowSize } from "../../utils/windowSizeUtil";
 import { Link } from "react-router-dom";
 
-const StyledHome = styled.div`
-  /* padding: 10%; */
-`;
+const StyledHome = styled.div``;
 
 const LogoContainer = styled(Link)`
   position: absolute;
@@ -23,23 +23,35 @@ const LogoContainer = styled(Link)`
 `;
 
 const Home = (): JSX.Element => {
-  const isTablet = useWindowSize();
+  const { isTablet, isMobile, isDesktop } = useWindowSize();
 
   return (
     <StyledHome>
-      {!isTablet && (
+      {isDesktop && (
         <LogoContainer to="/">
           <Logo />
         </LogoContainer>
       )}
       <HomePresentation />
       <HomeLocation
-        image={isTablet ? enjoyablePlaceTablet : enjoyablePlace}
+        image={
+          isTablet
+            ? enjoyablePlaceTablet
+            : isMobile
+            ? enjoyablePlaceMobile
+            : enjoyablePlace
+        }
         subtitle="Enjoyable place for all the family"
         text="Our relaxed surroundings make dining with us a great experience for everyone. We can even arrange a tour of the farm before your meal."
       />
       <HomeLocation
-        image={isTablet ? locallySourcedTablet : locallySourced}
+        image={
+          isTablet
+            ? locallySourcedTablet
+            : isMobile
+            ? locallySourcedMobile
+            : locallySourced
+        }
         subtitle="The most locally sourced food"
         text="All our ingredients come directly from our farm or local fishery. So you can be sure that you’re eating the freshest, most sustainable food."
         reversed={true}

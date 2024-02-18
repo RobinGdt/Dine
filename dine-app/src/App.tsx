@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import GlobalStyles from "./GlobalStyle";
 import Booking from "./components/Booking/Booking";
@@ -7,6 +8,9 @@ import Typography from "./utils/Typography";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Router>
       <GlobalStyles />

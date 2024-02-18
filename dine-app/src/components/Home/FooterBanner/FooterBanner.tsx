@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import readyBg from "../assets/ready-bg-desktop.jpg";
+import readyBgMobile from "../assets/ready-bg-mobile.jpg";
 import BaseButton, { MEDIUM } from "../../BaseButton/BaseButton";
 
 const StyledFooterBanner = styled.div`
@@ -16,6 +17,10 @@ const StyledFooterBanner = styled.div`
     margin-block-end: 0px;
     margin-block-start: 0px;
   }
+
+  @media (max-width: 550px) {
+    background-image: url(${readyBgMobile});
+  }
 `;
 
 const Container = styled.div`
@@ -29,6 +34,11 @@ const Container = styled.div`
     flex-direction: column;
     text-align: center;
     gap: 20px;
+  }
+
+  @media (max-width: 550px) {
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 `;
 

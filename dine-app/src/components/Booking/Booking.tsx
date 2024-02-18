@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import heroDesktop from "./assets/hero-bg-desktop@2x.jpg";
+import heroDesktopTablet from "./assets/hero-bg-tablet@2x.jpg";
+import heroDesktopMobile from "./assets/hero-bg-mobile@2x.jpg";
 import { Grid, Logo } from "../../starter-code/images/icons/icon";
 import FormReservation from "../FormReservation/FormReservation";
 import { Link } from "react-router-dom";
+import BaseButton, { MEDIUM } from "../BaseButton/BaseButton";
+import { useWindowSize } from "../../utils/windowSizeUtil";
 
 const StyledBooking = styled.div`
   display: flex;
@@ -15,6 +19,10 @@ const LogoContainer = styled(Link)`
   top: 7%;
   left: 10%;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    left: 40%;
+  }
 `;
 
 const ReservationContainer = styled.div`
@@ -29,6 +37,11 @@ const ReservationContainer = styled.div`
 
   @media (max-width: 768px) {
     width: auto;
+    background-image: url(${heroDesktopTablet});
+  }
+
+  @media (max-width: 550px) {
+    background-image: url(${heroDesktopMobile});
   }
 `;
 
@@ -59,6 +72,11 @@ const ReservationWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
+
+  @media (max-width: 550px) {
+    align-items: center;
+    margin-bottom: 10%;
+  }
 `;
 
 const InBetween = styled.div`
@@ -67,11 +85,20 @@ const InBetween = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    height: 500px;
+  }
+
+  @media (max-width: 550px) {
+    height: 620px;
+  }
 `;
 
 const GridContainer = styled.div``;
 
 const Booking = () => {
+  const { isMobile, isTablet, isDesktop } = useWindowSize();
   return (
     <StyledBooking>
       <LogoContainer to="/">
@@ -86,6 +113,9 @@ const Booking = () => {
               please feel free to call on the phone number below. We’ll be happy
               to accommodate you.
             </p>
+            {isMobile && !isDesktop && !isTablet && (
+              <BaseButton width={MEDIUM} title="RESERVE PLACE" />
+            )}
           </ReservationWrapper>
           <FormReservation />
         </ReservationContent>

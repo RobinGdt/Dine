@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import heroBgImage from "../assets/hero-bg-desktop.jpg";
 import heroBgImageTablet from "../assets/hero-bg-tablet.jpg";
+import heroBgImageMobile from "../assets/hero-bg-mobile.jpg";
 import ContainerWithButton from "../../ContainerWithButon/ContainerWithButon";
 import { useWindowSize } from "../../../utils/windowSizeUtil";
 import { Logo } from "../../../starter-code/images/icons/icon";
 
-const StyledHome = styled.div<{ isTablet: boolean }>`
+const StyledHome = styled.div`
   width: 100%;
   height: 100vh;
   background-size: cover;
-  background-image: ${(props) =>
-    props.isTablet ? `url(${heroBgImageTablet})` : `url(${heroBgImage})`};
+  background-image: url(${heroBgImage});
   background-repeat: no-repeat;
   h1 {
     color: white;
@@ -21,6 +21,10 @@ const StyledHome = styled.div<{ isTablet: boolean }>`
 
   @media (max-width: 768px) {
     display: flex;
+    background-image: url(${heroBgImageTablet});
+  }
+  @media (max-width: 550px) {
+    background-image: url(${heroBgImageMobile});
   }
 `;
 
@@ -36,15 +40,19 @@ const HomeContainer = styled.div`
     width: 100%;
     margin-top: 25%;
   }
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
 `;
 
 const HomePresentation = (): JSX.Element => {
-  const isTablet = useWindowSize();
+  const { isDesktop, isTablet, isMobile } = useWindowSize();
 
   return (
-    <StyledHome isTablet={isTablet}>
+    <StyledHome>
       <HomeContainer>
-        {isTablet && <Logo />}
+        {!isDesktop && (isTablet || isMobile) && <Logo />}
         <ContainerWithButton
           title="Exquisite dining since 1989"
           text="Experience our seasonal menu in beautiful country surroundings. Eat the freshest produce from the comfort of our farmhouse."

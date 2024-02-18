@@ -12,6 +12,11 @@ const Typography = styled.createGlobalStyle`
     @media (max-width: 768px) {
       font-size: var(--48px);
     }
+
+    @media (max-width: 550px) {
+      font-size: var(--32px);
+      line-height: 40px;
+    }
   }
 
   h2 {
@@ -20,6 +25,11 @@ const Typography = styled.createGlobalStyle`
     line-height: var(--48px);
     letter-spacing: var(--05-px);
     font-weight: 700;
+
+    @media (max-width: 550px) {
+      font-size: var(--32px);
+      line-height: 40px;
+    }
   }
 
   h3 {
@@ -46,6 +56,11 @@ const Typography = styled.createGlobalStyle`
 
     @media (max-width: 768px) {
       line-height: var(--30px);
+    }
+
+    @media (max-width: 550px) {
+      font-size: var(--16px);
+      line-height: var(--28px);
     }
   }
 `;

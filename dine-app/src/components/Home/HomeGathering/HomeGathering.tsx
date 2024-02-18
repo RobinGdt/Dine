@@ -1,30 +1,28 @@
 import styled from "styled-components";
 import famillyGathering from "../assets/family-gathering-desktop.jpg";
 import famillyGatheringTablet from "../assets/family-gathering-tablet.jpg";
+import famillyGatheringMobile from "../assets/family-gathering-mobile.jpg";
 import specialEvents from "../assets/special-events-desktop.jpg";
 import specialEventsTablet from "../assets/special-events-tablet.jpg";
+import specialEventsMobile from "../assets/special-events-mobile.jpg";
 import socialEvents from "../assets/social-events-desktop.jpg";
 import socialEventsTablet from "../assets/social-events-tablet.jpg";
+import socialEventsMobile from "../assets/social-events-mobile.jpg";
 import BaseButton, { MEDIUM } from "../../BaseButton/BaseButton";
 import { useState } from "react";
 import { Grid, SimpleBar } from "../../../starter-code/images/icons/icon";
 import useSlide from "../../../utils/useParallax";
 import { useWindowSize } from "../../../utils/windowSizeUtil";
+import { shadow } from "../../../GlobalStyle";
+import { COLORS } from "../../../utils/palette";
 
 const StyledHomeGathering = styled.div`
   padding: 10%;
-
-  img {
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
 `;
 
 const HomeGatheringContainer = styled.div<{
   opacity: number;
-  isTransitioning: boolean;
+  $istransitioning: boolean;
 }>`
   display: flex;
   gap: 10%;
@@ -36,10 +34,22 @@ const HomeGatheringContainer = styled.div<{
   }
 
   img {
-    transition: opacity ${(props) => (props.isTransitioning ? "0.5s" : "0s")}
+    width: 100%;
+    box-shadow: ${shadow};
+    transition: opacity ${(props) => (props.$istransitioning ? "0.5s" : "0s")}
         ease-out,
-      transform ${(props) => (props.isTransitioning ? "0.7s" : "0s")} ease-out;
-    opacity: ${(props) => (props.isTransitioning ? 0 : 1)};
+      transform ${(props) => (props.$istransitioning ? "0.7s" : "0s")} ease-out;
+    opacity: ${(props) => (props.$istransitioning ? 0 : 1)};
+  }
+
+  @media (max-width: 1001px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 70%;
+    }
   }
 
   @media (max-width: 768px) {
@@ -49,16 +59,14 @@ const HomeGatheringContainer = styled.div<{
   }
 `;
 
-const ImageContainer = styled.div`
-  @media (max-width: 768px) {
-    margin-bottom: 10%;
-  }
-`;
-
 const GridContainer = styled.div`
   position: absolute;
   left: -5%;
   top: -5%;
+
+  @media (max-width: 550px) {
+    display: none;
+  }
 `;
 
 const DescriptionContainer = styled.div`
@@ -78,18 +86,27 @@ const DescriptionWrapper = styled.div`
   flex-direction: column;
   gap: var(--30px);
 
+  @media (max-width: 1001px) {
+    text-align: center;
+    align-items: center;
+  }
+
   @media (max-width: 768px) {
     width: 75%;
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
 `;
 
-const Subtitle = styled.h4<{ isActive: boolean }>`
+const Subtitle = styled.h4<{ $isactive: boolean }>`
   margin-block-end: 5px;
   margin-block-start: 5px;
   cursor: pointer;
-  color: ${(props) => (props.isActive ? "black" : "#cecece")};
+  color: ${(props) => (props.$isactive ? `${COLORS.CODGRAY[100]}` : "#cecece")};
 
   &:hover {
     color: var(--cod-gray-100);
@@ -97,10 +114,24 @@ const Subtitle = styled.h4<{ isActive: boolean }>`
 `;
 
 const ChoiceContainer = styled.div`
+  @media (max-width: 1001px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    order: -1;
+    margin-top: 10%;
+  }
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 550px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     order: -1;
   }
@@ -115,33 +146,45 @@ const SubtitleContainer = styled.div`
 `;
 
 const HomeGathering = () => {
-  const isTablet = useWindowSize();
+  const { isTablet, isMobile } = useWindowSize();
   const { containerRef, opacity, isVisible } = useSlide();
   const [currentImage, setCurrentImage] = useState(
     isTablet ? famillyGatheringTablet : famillyGathering
   );
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [$istransitioning, set$istransitioning] = useState(false);
 
   const titles = [
     {
       title: "FAMILY GATHERING",
-      image: isTablet ? famillyGatheringTablet : famillyGathering,
+      image: isTablet
+        ? famillyGatheringTablet
+        : isMobile
+        ? famillyGatheringMobile
+        : famillyGathering,
     },
     {
       title: "SPECIAL EVENTS",
-      image: isTablet ? specialEventsTablet : specialEvents,
+      image: isTablet
+        ? specialEventsTablet
+        : isMobile
+        ? specialEventsMobile
+        : specialEvents,
     },
     {
       title: "SOCIAL EVENTS",
-      image: isTablet ? socialEventsTablet : socialEvents,
+      image: isTablet
+        ? socialEventsTablet
+        : isMobile
+        ? socialEventsMobile
+        : socialEvents,
     },
   ];
 
-  const handleImage = (image: any) => {
-    setIsTransitioning(true);
+  const handleImage = (image: string) => {
+    set$istransitioning(true);
     setTimeout(() => {
       setCurrentImage(image);
-      setIsTransitioning(false);
+      set$istransitioning(false);
     }, 200);
   };
 
@@ -149,15 +192,13 @@ const HomeGathering = () => {
     <StyledHomeGathering ref={containerRef}>
       <HomeGatheringContainer
         opacity={opacity}
-        isTransitioning={isTransitioning}
+        $istransitioning={$istransitioning}
         className={isVisible ? "visible" : ""}
       >
-        <ImageContainer>
-          <GridContainer>
-            <Grid />
-          </GridContainer>
-          <img src={currentImage} alt={currentImage} />
-        </ImageContainer>
+        <GridContainer>
+          <Grid />
+        </GridContainer>
+        <img src={currentImage} alt={currentImage} />
         <DescriptionContainer>
           <DescriptionWrapper>
             <div>
@@ -171,16 +212,17 @@ const HomeGathering = () => {
             <BaseButton
               to="/booking"
               title="BOOK A TABLE"
-              onLight={true}
+              light={true}
               width={MEDIUM}
             />
           </DescriptionWrapper>
           <ChoiceContainer>
             {titles.map((item, index) => (
-              <SubtitleContainer>
+              <SubtitleContainer key={index}>
                 <Subtitle
+                  key={index}
                   onClick={() => handleImage(item.image)}
-                  isActive={currentImage === item.image}
+                  $isactive={currentImage === item.image}
                 >
                   {item.title}
                 </Subtitle>

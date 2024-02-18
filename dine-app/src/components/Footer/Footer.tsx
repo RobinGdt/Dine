@@ -19,6 +19,14 @@ const StyledFooter = styled.div`
     margin-block-end: 5px;
     margin-block-start: 5px;
   }
+
+  @media (max-width: 550px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
 `;
 
 const Container = styled.div`
@@ -36,6 +44,11 @@ const Wrapper = styled.div`
     width: 60%;
     justify-content: space-between;
     gap: 50px;
+  }
+
+  @media (max-width: 550px) {
+    width: 90%;
+    text-align: center;
   }
 `;
 
