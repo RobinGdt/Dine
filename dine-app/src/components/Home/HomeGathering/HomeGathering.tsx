@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import famillyGathering from "../assets/family-gathering-desktop.jpg";
+import famillyGatheringTablet from "../assets/family-gathering-tablet.jpg";
 import specialEvents from "../assets/special-events-desktop.jpg";
+import specialEventsTablet from "../assets/special-events-tablet.jpg";
 import socialEvents from "../assets/social-events-desktop.jpg";
-import BaseButton from "../../BaseButton/BaseButton";
+import socialEventsTablet from "../assets/social-events-tablet.jpg";
+import BaseButton, { MEDIUM } from "../../BaseButton/BaseButton";
 import { useState } from "react";
 import { Grid, SimpleBar } from "../../../starter-code/images/icons/icon";
 import useSlide from "../../../utils/useParallax";
+import { useWindowSize } from "../../../utils/windowSizeUtil";
 
 const StyledHomeGathering = styled.div`
   padding: 10%;
@@ -111,14 +115,26 @@ const SubtitleContainer = styled.div`
 `;
 
 const HomeGathering = () => {
+  const isTablet = useWindowSize();
   const { containerRef, opacity, isVisible } = useSlide();
-  const [currentImage, setCurrentImage] = useState(famillyGathering);
+  const [currentImage, setCurrentImage] = useState(
+    isTablet ? famillyGatheringTablet : famillyGathering
+  );
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const titles = [
-    { title: "FAMILY GATHERING", image: famillyGathering },
-    { title: "SPECIAL EVENTS", image: specialEvents },
-    { title: "SOCIAL EVENTS", image: socialEvents },
+    {
+      title: "FAMILY GATHERING",
+      image: isTablet ? famillyGatheringTablet : famillyGathering,
+    },
+    {
+      title: "SPECIAL EVENTS",
+      image: isTablet ? specialEventsTablet : specialEvents,
+    },
+    {
+      title: "SOCIAL EVENTS",
+      image: isTablet ? socialEventsTablet : socialEvents,
+    },
   ];
 
   const handleImage = (image: any) => {
@@ -155,8 +171,8 @@ const HomeGathering = () => {
             <BaseButton
               to="/booking"
               title="BOOK A TABLE"
-              width="40%"
               onLight={true}
+              width={MEDIUM}
             />
           </DescriptionWrapper>
           <ChoiceContainer>

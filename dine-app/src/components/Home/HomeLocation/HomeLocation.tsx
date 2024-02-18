@@ -31,6 +31,7 @@ const HomeLocationContainer = styled.div<{
 
   @media (max-width: 1001px) {
     flex-wrap: wrap;
+    gap: 20px;
   }
 `;
 
@@ -39,10 +40,22 @@ const HomeLocationText = styled.div<{ reversed?: boolean }>`
   flex-direction: column;
   margin-left: ${(props) => (props.reversed ? "0" : "15%")};
   margin-right: ${(props) => (props.reversed ? "15%" : "0")};
+
+  @media (max-width: 1001px) {
+    text-align: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
+  }
 `;
 
 const SubtitleContainer = styled.div`
-  width: 85%;
+  width: 80%;
+
+  @media (max-width: 1001px) {
+    align-items: center;
+  }
 `;
 
 const GridContainer = styled.div`

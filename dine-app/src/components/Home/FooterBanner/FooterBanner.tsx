@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import readyBg from "../assets/ready-bg-desktop.jpg";
-import BaseButton from "../../BaseButton/BaseButton";
+import BaseButton, { MEDIUM } from "../../BaseButton/BaseButton";
 
 const StyledFooterBanner = styled.div`
   padding-left: 9%;
@@ -37,7 +37,7 @@ const FooterBanner = () => {
     <StyledFooterBanner>
       <Container>
         <h2>Ready to make a reservation?</h2>
-        <BaseButton to="/booking" width="40%" title="BOOK A TABLE" />
+        <BaseButton to="/booking" title="BOOK A TABLE" width={MEDIUM} />
       </Container>
     </StyledFooterBanner>
   );

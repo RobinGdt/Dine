@@ -10,7 +10,7 @@ const useSlide = (threshold = 0.5) => {
     const handleScroll = () => {
       if (containerRef.current && !hasAnimated) {
         const boundingBox = containerRef.current.getBoundingClientRect();
-        const windowMidpoint = window.innerHeight / 2;
+        const windowMidpoint = window.innerHeight;
 
         const isVisible =
           boundingBox.top < windowMidpoint * threshold &&

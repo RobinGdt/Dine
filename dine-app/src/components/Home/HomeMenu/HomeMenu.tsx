@@ -18,6 +18,10 @@ const StyledHomeMenu = styled.div`
   padding-left: 10%;
   padding-right: 10%;
   padding-bottom: 4%;
+
+  @media (max-width: 1001px) {
+    padding-bottom: 10%;
+  }
 `;
 
 const HomeLocationContainer = styled.div<{

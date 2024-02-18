@@ -43,6 +43,10 @@ const Typography = styled.createGlobalStyle`
     font-size: var(--20px);
     line-height: var(--24px);
     font-weight: 400;
+
+    @media (max-width: 768px) {
+      line-height: var(--30px);
+    }
   }
 `;
 

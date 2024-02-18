@@ -2,6 +2,7 @@ import styled from "styled-components";
 import heroDesktop from "./assets/hero-bg-desktop@2x.jpg";
 import { Grid, Logo } from "../../starter-code/images/icons/icon";
 import FormReservation from "../FormReservation/FormReservation";
+import { Link } from "react-router-dom";
 
 const StyledBooking = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const StyledBooking = styled.div`
   min-height: 100vh;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   position: absolute;
   top: 7%;
   left: 10%;
@@ -19,14 +20,16 @@ const LogoContainer = styled.div`
 const ReservationContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-left: 10%;
-  padding-right: 10%;
   background-size: cover;
   background-image: url(${heroDesktop});
   width: 100%;
   height: 600px;
   background-repeat: no-repeat;
   color: white;
+
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 
 const ReservationContent = styled.div`
@@ -35,12 +38,27 @@ const ReservationContent = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   top: 20%;
+  left: 10%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    left: 5%;
+    top: 15%;
+    width: 90%;
+    gap: 40px;
+  }
 `;
 
 const ReservationWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 30%;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const InBetween = styled.div`
@@ -56,7 +74,7 @@ const GridContainer = styled.div``;
 const Booking = () => {
   return (
     <StyledBooking>
-      <LogoContainer>
+      <LogoContainer to="/">
         <Logo />
       </LogoContainer>
       <ReservationContainer>

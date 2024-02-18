@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { COLORS } from "../../utils/palette";
 import { Link } from "react-router-dom";
 
+export const SMALL = "165px";
+export const MEDIUM = "245px";
+export const LARGE = "100%";
+
 interface BaseButtonProps {
   title: string;
   width: string;
@@ -17,7 +21,7 @@ const StyledButton = styled.div<{
   disabled?: boolean;
   onLight?: boolean;
 }>`
-  width: ${(props) => props.width || "40%"};
+  width: ${(props) => props.width};
 
   &:hover {
     background-color: ${(props) => (props.disabled ? "transparent" : "white")};

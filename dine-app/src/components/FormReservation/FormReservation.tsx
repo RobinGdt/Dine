@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BaseButton from "../BaseButton/BaseButton";
+import BaseButton, { LARGE } from "../BaseButton/BaseButton";
 import { FieldError, useForm } from "react-hook-form";
 import { COLORS } from "../../utils/palette";
 import { shadow } from "../../GlobalStyle";
@@ -15,6 +15,11 @@ const StyledFormReservation = styled.form`
   right: 10%;
   top: 25%;
   box-shadow: ${shadow};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 60%;
+  }
 `;
 
 const Input = styled.input<{ invalid: any }>`
@@ -246,9 +251,9 @@ const FormReservation = () => {
       </NumberInputContainer>
       <BaseButton
         type="submit"
-        width="100%"
         title="MAKE RESERVATION"
         onLight={true}
+        width={LARGE}
       />
     </StyledFormReservation>
   );

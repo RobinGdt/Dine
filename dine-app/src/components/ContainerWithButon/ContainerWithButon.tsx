@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BaseButton from "../BaseButton/BaseButton";
+import BaseButton, { MEDIUM } from "../BaseButton/BaseButton";
 
 interface ContainerWithButonProps {
   title: string;
@@ -40,7 +40,7 @@ const ContainerWithButon = ({
         <h1>{title}</h1>
       </Title>
       <p>{text}</p>
-      <BaseButton to="/booking" title={butonTitle} width="50%" />
+      <BaseButton to="/booking" title={butonTitle} width={MEDIUM} />
     </StyledContainer>
   );
 };
