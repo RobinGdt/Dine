@@ -9,7 +9,7 @@ import socialEvents from "../assets/social-events-desktop.jpg";
 import socialEventsTablet from "../assets/social-events-tablet.jpg";
 import socialEventsMobile from "../assets/social-events-mobile.jpg";
 import BaseButton, { MEDIUM } from "../../BaseButton/BaseButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Grid, SimpleBar } from "../../../starter-code/images/icons/icon";
 import useSlide from "../../../utils/useParallax";
 import { useWindowSize } from "../../../utils/windowSizeUtil";
@@ -151,7 +151,7 @@ const HomeGathering = () => {
   const [currentImage, setCurrentImage] = useState(
     isTablet ? famillyGatheringTablet : famillyGathering
   );
-  const [$istransitioning, set$istransitioning] = useState(false);
+  const [istransitioning, setistransitioning] = useState(false);
 
   const titles = [
     {
@@ -180,11 +180,15 @@ const HomeGathering = () => {
     },
   ];
 
+  useEffect(() => {
+    setCurrentImage(isTablet ? famillyGatheringTablet : famillyGathering);
+  }, [isTablet]);
+
   const handleImage = (image: string) => {
-    set$istransitioning(true);
+    setistransitioning(true);
     setTimeout(() => {
       setCurrentImage(image);
-      set$istransitioning(false);
+      setistransitioning(false);
     }, 200);
   };
 
@@ -192,7 +196,7 @@ const HomeGathering = () => {
     <StyledHomeGathering ref={containerRef}>
       <HomeGatheringContainer
         opacity={opacity}
-        $istransitioning={$istransitioning}
+        $istransitioning={istransitioning}
         className={isVisible ? "visible" : ""}
       >
         <GridContainer>

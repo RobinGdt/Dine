@@ -4,18 +4,6 @@ import { FieldError, useForm } from "react-hook-form";
 import { COLORS } from "../../utils/palette";
 import { shadow } from "../../GlobalStyle";
 
-interface FormData {
-  name: string;
-  email: string;
-  date: string;
-  month: string;
-  year: string;
-  hour: string;
-  minute: string;
-  ampm: string;
-  quantity: number;
-}
-
 const StyledFormReservation = styled.form`
   padding: 50px;
   background-color: white;
@@ -34,7 +22,7 @@ const StyledFormReservation = styled.form`
   }
 `;
 
-const Input = styled.input<{ $invalid?: boolean | FieldError }>`
+const Input = styled.input<{ $invalid: any }>`
   width: 20%;
   border: none;
   display: flex;
@@ -52,7 +40,7 @@ const Input = styled.input<{ $invalid?: boolean | FieldError }>`
   }
 `;
 
-const InputText = styled.input<{ $invalid?: boolean | FieldError }>`
+const InputText = styled.input<{ $invalid: any }>`
   width: 100%;
   border: none;
   display: flex;
@@ -81,12 +69,15 @@ const PickContainer = styled.div<{ $haserror: FieldError | undefined }>`
   }
   @media (max-width: 550px) {
     flex-wrap: wrap;
-    align-items: start;
+  }
+`;
 
-    p {
-      width: 100%;
-      justify-content: start;
-    }
+const PickWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 550px) {
+    width: 100%;
+    align-items: flex-start;
   }
 `;
 
@@ -153,22 +144,22 @@ const SpinButton = styled.div`
 `;
 
 const FormReservation = () => {
-  const { handleSubmit, setValue, register, formState, watch } =
-    useForm<FormData>({
-      defaultValues: {
-        name: "",
-        email: "",
-        date: "",
-        month: "",
-        year: "",
-        hour: "",
-        minute: "",
-        ampm: "AM",
-        quantity: 1,
-      },
-    });
+  const { handleSubmit, setValue, register, formState, watch } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      pick: "",
+      date: "",
+      month: "",
+      year: "",
+      hour: "",
+      minute: "",
+      ampm: "AM",
+      quantity: 1,
+    },
+  });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: any) => {
     console.log(data);
   };
 
@@ -177,8 +168,8 @@ const FormReservation = () => {
     return emailRegex.test(email);
   };
 
-  const validateNumber = (value: number | string): boolean => {
-    return !isNaN(Number(value));
+  const validateNumber = (value: any) => {
+    return !isNaN(value);
   };
 
   return (
@@ -202,10 +193,12 @@ const FormReservation = () => {
           formState.errors.year
         }
       >
-        <p>Pick a date</p>
-        {formState.errors.date && (
-          <ErrorMessage>This field can not be incomplete</ErrorMessage>
-        )}
+        <PickWrapper>
+          <p>Pick a date</p>
+          {formState.errors.date && (
+            <ErrorMessage>This field is incomplete</ErrorMessage>
+          )}
+        </PickWrapper>
         <Input
           placeholder="DD"
           type="numeric"
@@ -228,7 +221,12 @@ const FormReservation = () => {
       <PickContainer
         $haserror={formState.errors.hour || formState.errors.minute}
       >
-        <p>Pick a time</p>
+        <PickWrapper>
+          <p>Pick a time</p>
+          {formState.errors.hour && (
+            <ErrorMessage>This field is incomplete</ErrorMessage>
+          )}
+        </PickWrapper>
         <Input
           placeholder="09"
           type="numeric"
@@ -249,7 +247,9 @@ const FormReservation = () => {
       <NumberInputContainer>
         <NumberInputContent>
           <SpinButton
-            onClick={() => setValue("quantity", watch("quantity") - 1)}
+            onClick={() =>
+              setValue("quantity", Math.max(watch("quantity") - 1, 1))
+            }
           >
             -
           </SpinButton>
@@ -266,7 +266,9 @@ const FormReservation = () => {
             <p>people</p>
           </PeopleLabel>
           <SpinButton
-            onClick={() => setValue("quantity", watch("quantity") + 1)}
+            onClick={() =>
+              setValue("quantity", Math.min(watch("quantity") + 1, 12))
+            }
           >
             +
           </SpinButton>

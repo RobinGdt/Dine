@@ -74,7 +74,7 @@ const Button = styled.button<{
       color: white;
     }
   }
-  &[$dark-outlined="true"] {
+  &[dark-outlined="true"] {
     color: white;
     border: 1px solid white;
 
@@ -137,7 +137,7 @@ const LinkButton = styled(Link)<{
       color: white;
     }
   }
-  &[$dark-outlined="true"] {
+  &[dark-outlined="true"] {
     color: white;
     border: 1px solid white;
 

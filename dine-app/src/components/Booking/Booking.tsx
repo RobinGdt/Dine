@@ -20,7 +20,7 @@ const LogoContainer = styled(Link)`
   left: 10%;
   z-index: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: 550px) {
     left: 40%;
   }
 `;
