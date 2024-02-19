@@ -16,6 +16,7 @@ function App() {
       <GlobalStyles />
       <Typography />
       <Routes>
+        <Home />
         <Route path="/Booking" element={<Booking />} />
         <Route path="/" element={<Home />} />
       </Routes>
