@@ -114,7 +114,11 @@ const Booking = () => {
               to accommodate you.
             </p>
             {isMobile && !isDesktop && !isTablet && (
-              <BaseButton width={MEDIUM} title="RESERVE PLACE" />
+              <BaseButton
+                width={MEDIUM}
+                title="RESERVE PLACE"
+                darkoutlined={true}
+              />
             )}
           </ReservationWrapper>
           <FormReservation />

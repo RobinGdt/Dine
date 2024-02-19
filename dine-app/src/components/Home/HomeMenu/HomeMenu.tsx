@@ -69,6 +69,15 @@ const Menu = styled.div`
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+  }
+`;
+
+const MenuContainer = styled.div`
+  @media (max-width: 550px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 `;
 
@@ -86,6 +95,7 @@ const MenuWrapper = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: center;
     width: 80%;
     gap: 40px;
 
@@ -161,7 +171,7 @@ const HomeMenu = ({ subtitle, text }: StyledHomeMenuProps): JSX.Element => {
         </HomeLocationText>
         <Menu>
           {titles.map((item, index) => (
-            <div key={index}>
+            <MenuContainer key={index}>
               <MenuWrapper key={index}>
                 <img src={item.image} alt="" key={index} />
                 <DividerContainer>
@@ -173,7 +183,7 @@ const HomeMenu = ({ subtitle, text }: StyledHomeMenuProps): JSX.Element => {
                 </MenuDescription>
               </MenuWrapper>
               {index < 2 && <InBetween />}
-            </div>
+            </MenuContainer>
           ))}
         </Menu>
       </HomeLocationContainer>

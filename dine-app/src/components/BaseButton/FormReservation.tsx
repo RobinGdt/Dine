@@ -4,18 +4,6 @@ import { FieldError, useForm } from "react-hook-form";
 import { COLORS } from "../../utils/palette";
 import { shadow } from "../../GlobalStyle";
 
-interface FormData {
-  name: string;
-  email: string;
-  date: string;
-  month: string;
-  year: string;
-  hour: string;
-  minute: string;
-  ampm: string;
-  quantity: number;
-}
-
 const StyledFormReservation = styled.form`
   padding: 50px;
   background-color: white;
@@ -34,7 +22,7 @@ const StyledFormReservation = styled.form`
   }
 `;
 
-const Input = styled.input<{ $invalid?: boolean | FieldError }>`
+const Input = styled.input<{ invalid: any }>`
   width: 20%;
   border: none;
   display: flex;
@@ -42,32 +30,30 @@ const Input = styled.input<{ $invalid?: boolean | FieldError }>`
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid
-    ${(props) => (props.$invalid ? `${COLORS.GASPACHO[100]}` : "#979797")};
+    ${(props) => (props.invalid ? `${COLORS.GASPACHO[100]}` : "#979797")};
   color: ${(props) =>
-    props.$invalid ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
+    props.invalid ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
 
   &::placeholder {
-    color: ${(props) =>
-      props.$invalid ? `${COLORS.GASPACHO[50]}` : "#979797"};
+    color: ${(props) => (props.invalid ? `${COLORS.GASPACHO[50]}` : "#979797")};
   }
 `;
 
-const InputText = styled.input<{ $invalid?: boolean | FieldError }>`
+const InputText = styled.input<{ invalid: any }>`
   width: 100%;
   border: none;
   display: flex;
   border-bottom: 1px solid
-    ${(props) => (props.$invalid ? `${COLORS.GASPACHO[100]}` : "#979797")};
+    ${(props) => (props.invalid ? `${COLORS.GASPACHO[100]}` : "#979797")};
   color: ${(props) =>
-    props.$invalid ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
+    props.invalid ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
 
   &::placeholder {
-    color: ${(props) =>
-      props.$invalid ? `${COLORS.GASPACHO[50]}` : "#979797"};
+    color: ${(props) => (props.invalid ? `${COLORS.GASPACHO[50]}` : "#979797")};
   }
 `;
 
-const PickContainer = styled.div<{ $haserror: FieldError | undefined }>`
+const PickContainer = styled.div<{ haserror: FieldError | undefined }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,7 +61,7 @@ const PickContainer = styled.div<{ $haserror: FieldError | undefined }>`
 
   p {
     color: ${(props) =>
-      props.$haserror ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
+      props.haserror ? `${COLORS.GASPACHO[100]}` : `${COLORS.CODGRAY[100]}`};
     margin-block-start: 0;
     margin-block-end: 0;
   }
@@ -153,22 +139,22 @@ const SpinButton = styled.div`
 `;
 
 const FormReservation = () => {
-  const { handleSubmit, setValue, register, formState, watch } =
-    useForm<FormData>({
-      defaultValues: {
-        name: "",
-        email: "",
-        date: "",
-        month: "",
-        year: "",
-        hour: "",
-        minute: "",
-        ampm: "AM",
-        quantity: 1,
-      },
-    });
+  const { handleSubmit, setValue, register, formState, watch } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      pick: "",
+      date: "",
+      month: "",
+      year: "",
+      hour: "",
+      minute: "",
+      ampm: "AM",
+      quantity: 1,
+    },
+  });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: any) => {
     console.log(data);
   };
 
@@ -177,8 +163,8 @@ const FormReservation = () => {
     return emailRegex.test(email);
   };
 
-  const validateNumber = (value: number | string): boolean => {
-    return !isNaN(Number(value));
+  const validateNumber = (value: any) => {
+    return !isNaN(value);
   };
 
   return (
@@ -187,16 +173,16 @@ const FormReservation = () => {
         placeholder="Name"
         type="text"
         {...register("name", { required: true })}
-        $invalid={formState.errors.name}
+        invalid={formState.errors.name}
       />
       <InputText
         placeholder="Email"
         type="email"
         {...register("email", { required: true, validate: validateEmail })}
-        $invalid={formState.errors.email}
+        invalid={formState.errors.email}
       />
       <PickContainer
-        $haserror={
+        haserror={
           formState.errors.date ||
           formState.errors.month ||
           formState.errors.year
@@ -210,36 +196,36 @@ const FormReservation = () => {
           placeholder="DD"
           type="numeric"
           {...register("date", { required: true, validate: validateNumber })}
-          $invalid={formState.errors.date}
+          invalid={formState.errors.date}
         />
         <Input
           placeholder="MM"
           type="numeric"
           {...register("month", { required: true, validate: validateNumber })}
-          $invalid={formState.errors.month}
+          invalid={formState.errors.month}
         />
         <Input
           placeholder="YYYY"
           type="numeric"
           {...register("year", { required: true, validate: validateNumber })}
-          $invalid={formState.errors.year}
+          invalid={formState.errors.year}
         />
       </PickContainer>
       <PickContainer
-        $haserror={formState.errors.hour || formState.errors.minute}
+        haserror={formState.errors.hour || formState.errors.minute}
       >
         <p>Pick a time</p>
         <Input
           placeholder="09"
           type="numeric"
           {...register("hour", { required: true, validate: validateNumber })}
-          $invalid={formState.errors.hour}
+          invalid={formState.errors.hour}
         />
         <Input
           placeholder="00"
           type="numeric"
           {...register("minute", { required: true, validate: validateNumber })}
-          $invalid={formState.errors.minute}
+          invalid={formState.errors.minute}
         />
         <Select {...register("ampm")}>
           <option value="AM">AM</option>
