@@ -11,15 +11,15 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
-    <Router>
+    <Router basename="/Dine">
       <GlobalStyles />
       <Typography />
       <Routes>
-        <Route path="/Booking" element={<Booking />} />
         <Route path="/" element={<Home />} />
+        <Route path="/Booking" element={<Booking />} />
       </Routes>
-      <Home />
       <Footer />
     </Router>
   );
